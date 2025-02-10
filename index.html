@@ -27,18 +27,3 @@ index_html_final_with_links = """<!DOCTYPE html>
     </footer>
 </body>
 </html>
-"""
-
-# Nadpisanie pliku index.html z nowymi linkami
-with open(os.path.join(base_path, "index.html"), "w", encoding="utf-8") as f:
-    f.write(index_html_final_with_links)
-
-# Tworzenie nowego archiwum ZIP z zaktualizowanymi plikami
-zip_path = "/mnt/data/website_with_links.zip"
-with zipfile.ZipFile(zip_path, 'w') as zipf:
-    for root, _, files in os.walk(base_path):
-        for file in files:
-            zipf.write(os.path.join(root, file), file)
-
-# Zwracanie linku do pobrania
-zip_path
