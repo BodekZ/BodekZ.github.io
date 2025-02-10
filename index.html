@@ -1,20 +1,9 @@
-# Przykładowy kod HTML dla zegara i kalendarza na stronie
-
-calendar_and_clock_html = """<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Strona BodekZ</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script> <!-- Moment.js do kalendarza -->
-    <script>
-        // Funkcja do aktualizacji zegara
-        function updateClock() {
-            var now = moment();
-            document.getElementById("clock").innerText = now.format('HH:mm:ss');
-        }
-        setInterval(updateClock, 1000); // Aktualizuj co sekundę
-    </script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -22,35 +11,17 @@ calendar_and_clock_html = """<!DOCTYPE html>
         <h1>Witaj na mojej stronie!</h1>
         <p>Prosta wizytówka online</p>
     </header>
-    
     <section id="about">
         <h2>O mnie</h2>
-        <p>BodekZ – koduję, adminuję, a czasem nawet działa. 😆</p>
+        <p>Hej! Jestem BodekZ – czasem admin, czasem programista, a czasem po prostu człowiek, który lubi grzebać w kodzie. 
+        Jeśli masz do mnie sprawę, śmiało pisz na <a href="mailto:sirbodek@gmail.com">sirbodek@gmail.com</a> – może odpowiem szybciej, niż myślisz! 😆</p>
     </section>
-
-    <section id="calendar">
-        <h2>Kalendarz</h2>
-        <div id="current-date"></div>
-        <script>
-            // Wyświetlanie aktualnego miesiąca i dnia
-            document.getElementById("current-date").innerText = moment().format('MMMM YYYY');
-        </script>
+    <section id="contact">
+        <h2>Kontakt</h2>
+        <p>Email: <a href="mailto:sirbodek@gmail.com">sirbodek@gmail.com</a></p>
     </section>
-
-    <section id="clock">
-        <h2>Zegar</h2>
-        <p id="clock">Ładowanie zegara...</p>
-    </section>
-
     <footer>
         <p>© 2025 BodekZ - Wszystkie prawa zastrzeżone</p>
     </footer>
 </body>
 </html>
-"""
-
-# Zapisanie pliku HTML z zegarem i kalendarzem
-with open("/mnt/data/website_with_clock_calendar.html", "w", encoding="utf-8") as f:
-    f.write(calendar_and_clock_html)
-
-"/mnt/data/website_with_clock_calendar.html"
