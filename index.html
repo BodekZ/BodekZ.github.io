@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+
+index_html_final_with_links = """<!DOCTYPE html>
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
@@ -13,15 +14,31 @@
     </header>
     <section id="about">
         <h2>O mnie</h2>
-        <p>Hej! Jestem BodekZ – czasem admin, czasem programista, a czasem po prostu człowiek, który lubi grzebać w kodzie. 
-        Jeśli masz do mnie sprawę, śmiało pisz na <a href="mailto:sirbodek@gmail.com">sirbodek@gmail.com</a> – może odpowiem szybciej, niż myślisz! 😆</p>
+        <p>BodekZ – koduję, adminuję, a czasem nawet działa. 😆</p>
     </section>
     <section id="contact">
         <h2>Kontakt</h2>
         <p>Email: <a href="mailto:sirbodek@gmail.com">sirbodek@gmail.com</a></p>
+        <p>GitHub: <a href="https://github.com/BodekZ" target="_blank">github.com/BodekZ</a></p>
+        <p>LinkedIn: <a href="https://www.linkedin.com/in/bogdan-żuchliński-28a774316" target="_blank">linkedin.com/in/bogdan-żuchliński-28a774316</a></p>
     </section>
     <footer>
         <p>© 2025 BodekZ - Wszystkie prawa zastrzeżone</p>
     </footer>
 </body>
 </html>
+"""
+
+# Nadpisanie pliku index.html z nowymi linkami
+with open(os.path.join(base_path, "index.html"), "w", encoding="utf-8") as f:
+    f.write(index_html_final_with_links)
+
+# Tworzenie nowego archiwum ZIP z zaktualizowanymi plikami
+zip_path = "/mnt/data/website_with_links.zip"
+with zipfile.ZipFile(zip_path, 'w') as zipf:
+    for root, _, files in os.walk(base_path):
+        for file in files:
+            zipf.write(os.path.join(root, file), file)
+
+# Zwracanie linku do pobrania
+zip_path
