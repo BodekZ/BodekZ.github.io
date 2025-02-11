@@ -5,80 +5,105 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Strona BodekZ</title>
     <link rel="stylesheet" href="style.css">
+    
     <script>
         function updateClock() {
             const now = new Date();
             const hours = now.getHours().toString().padStart(2, '0');
             const minutes = now.getMinutes().toString().padStart(2, '0');
-            document.getElementById('clock').textContent = hours + ':' + minutes;
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+            document.getElementById('clock').textContent = hours + ':' + minutes + ':' + seconds;
         }
+
         function updateDate() {
             const now = new Date();
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            document.getElementById('calendar').textContent = now.toLocaleDateString('pl-PL', options);
+            const days = ['Niedziela', 'Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota'];
+            const months = ['Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec', 'Lipiec', 'Sierpień', 'Wrzesień', 'Październik', 'Listopad', 'Grudzień'];
+            const day = now.getDate();
+            const month = months[now.getMonth()];
+            const year = now.getFullYear();
+            const dayName = days[now.getDay()];
+            document.getElementById('calendar').textContent = `${dayName}, ${day} ${month} ${year}`;
         }
+
+        function updateVisits() {
+            let visits = localStorage.getItem('visitCount') || 0;
+            visits++;
+            localStorage.setItem('visitCount', visits);
+            document.getElementById('visit-counter').textContent = `Odwiedziny: ${visits}`;
+        }
+
         window.onload = function() {
             updateClock();
             updateDate();
-            setInterval(updateClock, 60000);
+            updateVisits();
+            setInterval(updateClock, 1000);
         };
     </script>
+
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; }
-        nav { background: #333; padding: 10px; }
-        nav a { color: white; text-decoration: none; margin: 10px; padding: 10px; background: #555; border-radius: 5px; }
-        nav a:hover { background: #777; }
-        .widget {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            background: white;
-            padding: 10px;
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        #clock {
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
-            box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
-            width: 100px;
-            height: 100px;
+            background-color: black;
+            color: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
+            font-size: 18px;
             font-weight: bold;
+            position: fixed;
+            top: 10px;
+            right: 10px;
+        }
+        #calendar {
+            font-size: 16px;
+            font-weight: bold;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            position: fixed;
+            top: 100px;
+            right: 10px;
+        }
+        #visit-counter {
+            margin-top: 20px;
+            font-weight: bold;
+            color: darkred;
         }
     </style>
 </head>
 <body>
-    <nav>
-        <a href="#about">O mnie</a>
-        <a href="#contact">Kontakt</a>
-        <a href="#projects">Projekty</a>
-    </nav>
     <header>
-        <h1>Witaj na mojej stronie!</h1>
-        <p>Prosta wizytówka online</p>
+        <h1>BodekZ - Wizytówka</h1>
+        <p>Koduję, adminuję, a czasem nawet działa. 😆</p>
     </header>
-    <section id="about">
+    <div class="container">
         <h2>O mnie</h2>
-        <p>BodekZ – koduję, adminuję, a czasem nawet działa. 😆</p>
-        <p>Znajdziesz mnie na:</p>
+        <p>Jestem pasjonatem technologii i administracji systemami. Znajdziesz mnie tutaj:</p>
         <ul>
             <li><a href="https://github.com/BodekZ" target="_blank">GitHub</a></li>
             <li><a href="https://www.linkedin.com/in/bogdan-żuchliński-28a774316" target="_blank">LinkedIn</a></li>
         </ul>
-    </section>
-    <section id="contact">
         <h2>Kontakt</h2>
         <p>Email: <a href="mailto:sirbodek@gmail.com">sirbodek@gmail.com</a></p>
-    </section>
-    <section id="projects">
-        <h2>Projekty</h2>
-        <p>Tu mogą być Twoje projekty!</p>
-    </section>
+    </div>
     <footer>
         <p>© 2025 BodekZ - Wszystkie prawa zastrzeżone</p>
+        <p id="visit-counter">Odwiedziny: 0</p>
     </footer>
-    <div class="widget">
-        <div id="clock"></div>
-        <div id="calendar"></div>
-    </div>
+
+    <div id="clock"></div>
+    <div id="calendar"></div>
 </body>
 </html>
