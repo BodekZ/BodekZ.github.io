@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Strona BodekZ</title>
     <link rel="stylesheet" href="style.css">
-    
     <script>
         function updateClock() {
             const now = new Date();
@@ -14,96 +13,64 @@
             const seconds = now.getSeconds().toString().padStart(2, '0');
             document.getElementById('clock').textContent = hours + ':' + minutes + ':' + seconds;
         }
-
-        function updateDate() {
-            const now = new Date();
-            const days = ['Niedziela', 'Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota'];
-            const months = ['Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec', 'Lipiec', 'Sierpień', 'Wrzesień', 'Październik', 'Listopad', 'Grudzień'];
-            const day = now.getDate();
-            const month = months[now.getMonth()];
-            const year = now.getFullYear();
-            const dayName = days[now.getDay()];
-            document.getElementById('calendar').textContent = `${dayName}, ${day} ${month} ${year}`;
-        }
-
-        function updateVisits() {
-            let visits = localStorage.getItem('visitCount') || 0;
-            visits++;
-            localStorage.setItem('visitCount', visits);
-            document.getElementById('visit-counter').textContent = `Odwiedziny: ${visits}`;
-        }
-
         window.onload = function() {
             updateClock();
-            updateDate();
-            updateVisits();
             setInterval(updateClock, 1000);
         };
     </script>
-
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f4f4f4;
-        }
-        .container {
-            margin-top: 50px;
-        }
         #clock {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background-color: black;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             font-size: 18px;
             font-weight: bold;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            text-align: center;
+            line-height: 100px;
             position: fixed;
             top: 10px;
             right: 10px;
         }
-        #calendar {
-            font-size: 16px;
-            font-weight: bold;
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            position: fixed;
-            top: 100px;
-            right: 10px;
-        }
-        #visit-counter {
+        .menu {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
             margin-top: 20px;
-            font-weight: bold;
-            color: darkred;
+        }
+        .menu button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>BodekZ - Wizytówka</h1>
-        <p>Koduję, adminuję, a czasem nawet działa. 😆</p>
+        <h1>Prosta wizytówka online</h1>
     </header>
-    <div class="container">
+    <nav class="menu">
+        <button onclick="document.getElementById('about').scrollIntoView()">O mnie</button>
+        <button onclick="document.getElementById('contact').scrollIntoView()">Kontakt</button>
+        <button onclick="document.getElementById('projects').scrollIntoView()">Projekty</button>
+    </nav>
+    <section id="about">
         <h2>O mnie</h2>
-        <p>Jestem pasjonatem technologii i administracji systemami. Znajdziesz mnie tutaj:</p>
-        <ul>
-            <li><a href="https://github.com/BodekZ" target="_blank">GitHub</a></li>
-            <li><a href="https://www.linkedin.com/in/bogdan-żuchliński-28a774316" target="_blank">LinkedIn</a></li>
-        </ul>
+        <p>BodekZ – koduję, adminuję, a czasem nawet działa. 😆</p>
+    </section>
+    <section id="projects">
+        <h2>Projekty</h2>
+        <p>Tutaj możesz dodać swoje projekty.</p>
+    </section>
+    <section id="contact">
         <h2>Kontakt</h2>
         <p>Email: <a href="mailto:sirbodek@gmail.com">sirbodek@gmail.com</a></p>
-    </div>
+    </section>
     <footer>
         <p>© 2025 BodekZ - Wszystkie prawa zastrzeżone</p>
-        <p id="visit-counter">Odwiedziny: 0</p>
     </footer>
-
     <div id="clock"></div>
-    <div id="calendar"></div>
 </body>
 </html>
