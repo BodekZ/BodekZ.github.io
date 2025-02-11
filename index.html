@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Strona BodekZ</title>
     <link rel="stylesheet" href="style.css">
-
+    
     <script>
         function updateClock() {
             const now = new Date();
@@ -17,61 +17,92 @@
 
         function updateDate() {
             const now = new Date();
-            const day = now.getDate().toString().padStart(2, '0');
-            const month = (now.getMonth() + 1).toString().padStart(2, '0');
+            const days = ['Niedziela', 'Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota'];
+            const months = ['Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec', 'Lipiec', 'Sierpień', 'Wrzesień', 'Październik', 'Listopad', 'Grudzień'];
+            const day = now.getDate();
+            const month = months[now.getMonth()];
             const year = now.getFullYear();
-            document.getElementById('calendar').textContent = day + '.' + month + '.' + year;
+            const dayName = days[now.getDay()];
+            document.getElementById('calendar').textContent = `${dayName}, ${day} ${month} ${year}`;
+        }
+
+        function updateVisits() {
+            let visits = localStorage.getItem('visitCount') || 0;
+            visits++;
+            localStorage.setItem('visitCount', visits);
+            document.getElementById('visit-counter').textContent = `Odwiedziny: ${visits}`;
         }
 
         window.onload = function() {
             updateClock();
             updateDate();
+            updateVisits();
             setInterval(updateClock, 1000);
         };
     </script>
 
     <style>
-        #clock, #calendar {
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        #clock {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: black;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 18px;
             font-weight: bold;
-            color: white;
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 10px;
-            border-radius: 5px;
             position: fixed;
             top: 10px;
             right: 10px;
         }
-
         #calendar {
-            top: 50px;
+            font-size: 16px;
+            font-weight: bold;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            position: fixed;
+            top: 100px;
+            right: 10px;
+        }
+        #visit-counter {
+            margin-top: 20px;
+            font-weight: bold;
+            color: darkred;
         }
     </style>
-
 </head>
 <body>
     <header>
-        <h1>Witaj na mojej stronie!</h1>
-        <p>Prosta wizytówka online</p>
+        <h1>BodekZ - Wizytówka</h1>
+        <p>Koduję, adminuję, a czasem nawet działa. 😆</p>
     </header>
-    <section id="about">
+    <div class="container">
         <h2>O mnie</h2>
-        <p>BodekZ – koduję, adminuję, a czasem nawet działa. 😆</p>
-        <p>Znajdziesz mnie na:</p>
+        <p>Jestem pasjonatem technologii i administracji systemami. Znajdziesz mnie tutaj:</p>
         <ul>
-            <li><a href="https://github.com/BodekZ" target="_blank">GitHub</a></li>
+            
             <li><a href="https://www.linkedin.com/in/bogdan-żuchliński-28a774316" target="_blank">LinkedIn</a></li>
         </ul>
-    </section>
-    <section id="contact">
         <h2>Kontakt</h2>
         <p>Email: <a href="mailto:sirbodek@gmail.com">sirbodek@gmail.com</a></p>
-    </section>
+    </div>
     <footer>
         <p>© 2025 BodekZ - Wszystkie prawa zastrzeżone</p>
+        <p id="visit-counter">Odwiedziny: 0</p>
     </footer>
 
-    <!-- Dodaj elementy zegara i kalendarza -->
     <div id="clock"></div>
     <div id="calendar"></div>
 </body>
